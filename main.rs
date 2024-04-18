@@ -3,6 +3,7 @@ use std::io;
 fn main(){
     let mut tabuleiro: [char; 9] = [' '; 9];
     let mut jogador_x = true;
+    let jogada_maxima: usize = 9;
     
     mostrar_nome_do_jogo();
     mostrar_tabuleiro(&tabuleiro);
@@ -25,8 +26,13 @@ fn main(){
                 continue;
             }
             Ok(mut entrada) => {
-                entrada = entrada - 1;
+                if entrada > 9 {
+                    println!("Input inválido. São aceitos apenas números de 1 a 9.");
+                    continue;
+                }
                 
+                entrada = entrada - 1;
+
                 if tabuleiro[entrada] != ' ' {
                     println!("Posição já ocupada!");
                     mostrar_tabuleiro(&tabuleiro);
